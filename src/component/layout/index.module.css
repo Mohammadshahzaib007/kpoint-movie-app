@@ -1,0 +1,11 @@
+.header > div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 60px;
+  background-color: var(--secondary-color);
+}
+
+.header {
+  background-color: var(--secondary-color);
+}

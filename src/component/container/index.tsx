@@ -1,10 +1,12 @@
+import cx from "classnames";
 import styles from "./index.module.css";
 
 type ContainerProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
 export default function Container(props: ContainerProps) {
-  const { children } = props;
-  return <div className={styles.container}>{children}</div>;
+  const { children, className } = props;
+  return <div className={cx(styles.container, className)}>{children}</div>;
 }

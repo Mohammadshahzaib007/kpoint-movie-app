@@ -1,8 +1,9 @@
 import Pill from "../pill";
 import Nav from "./nav";
-import { genera } from "../../contants/index";
 import Container from "../container";
 import styles from "./index.module.css";
+import { useContext } from "react";
+import { RootStateContext } from "../../state/provider";
 
 type Props = {
   children: React.ReactNode;
@@ -10,12 +11,15 @@ type Props = {
 
 const Layout = (props: Props) => {
   const { children } = props;
+
+  const { genres } = useContext(RootStateContext);
+
   return (
     <>
       <Nav />
       <header className={styles.header}>
         <Container>
-          {genera.map((g) => (
+          {genres.map((g) => (
             <Pill key={g.id} name={g.name} />
           ))}
         </Container>

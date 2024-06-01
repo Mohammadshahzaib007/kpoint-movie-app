@@ -1,5 +1,5 @@
 import styles from "./index.module.css"; // Import your CSS module
-import Movie from "../../types/index";
+import { Movie } from "../../types/index";
 
 const MovieCard = (props: Movie) => {
   const { title, image, genre, cast, director, description } = props;

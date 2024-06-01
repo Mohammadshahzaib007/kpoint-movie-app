@@ -4,8 +4,17 @@
   align-items: center;
   height: 60px;
   background-color: var(--secondary-color);
+  overflow: scroll
 }
 
 .header {
   background-color: var(--secondary-color);
+}
+
+.genres-container {
+  overflow: scroll;
+}
+
+.header > div::-webkit-scrollbar {
+  display: none;
 }

@@ -13,7 +13,7 @@
 }
 
 .movieCard div {
-    width: 50%;
+  width: 50%;
 }
 
 .movieImage {
@@ -38,4 +38,9 @@
 .movieDescription {
   margin-top: 0.5rem;
   font-size: 0.9rem;
+  line-height: 1.125rem;
+}
+
+p span:first-of-type {
+  font-weight: 600;
 }

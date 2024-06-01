@@ -1,7 +1,7 @@
 import styles from "./index.module.css"; // Import your CSS module
-import { Movie } from "../../types/index";
+import { MovieCardPropTypes } from "../../types/index";
 
-const MovieCard = (props: Movie) => {
+const MovieCard = (props: MovieCardPropTypes) => {
   const { title, image, genre, cast, director, description } = props;
 
   return (
@@ -15,14 +15,18 @@ const MovieCard = (props: Movie) => {
       </div>
       <div className={styles.movieInfo}>
         <h3 className={styles.movieTitle}>{title}</h3>
-        <p className={styles.movieGenre}>Genre: {genre.join(", ")}</p>
+        <p className={styles.movieGenre}>
+          <span>Genre:</span> {genre.join(", ")}
+        </p>
         <p className={styles.movieCast}>
-          Cast:{" "}
+          <span>Cast:</span>{" "}
           {cast.map((actor) => (
             <span key={actor}>{actor}, </span>
           ))}
         </p>
-        <p className={styles.movieDirector}>Director: {director}</p>
+        <p className={styles.movieDirector}>
+          <span>Director:</span> {director}
+        </p>
         <p className={styles.movieDescription}>{description}</p>
       </div>
     </div>

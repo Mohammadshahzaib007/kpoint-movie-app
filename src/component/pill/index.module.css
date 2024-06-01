@@ -1,0 +1,14 @@
+.pill {
+  padding: 6px 12px 6px 12px;
+  width: fit-content;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: var(--tertiary-color);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.pillSelected {
+  background-color: var(--primary-color);
+}

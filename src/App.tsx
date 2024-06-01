@@ -1,9 +1,10 @@
 import Layout from "./component/layout";
+import HomePage from "./pages/home";
 
 function App() {
   return (
     <Layout>
-      <h1>Hello World</h1>
+      <HomePage />
     </Layout>
   );
 }

@@ -20,9 +20,7 @@ const Layout = (props: Props) => {
           ))}
         </Container>
       </header>
-      <main>
-        <Container>{children}</Container>
-      </main>
+      <main>{children}</main>
     </>
   );
 };

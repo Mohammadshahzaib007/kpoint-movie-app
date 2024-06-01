@@ -1,0 +1,19 @@
+.cardContainer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.section {
+  min-height: 100%;
+  background: var(--body-color);
+  padding: 1rem 0;
+}
+
+.title {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}

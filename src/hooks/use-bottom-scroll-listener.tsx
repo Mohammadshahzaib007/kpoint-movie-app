@@ -8,7 +8,7 @@ const useBottomScrollListener = (callback?: () => void) => {
     const windowHeight = window.innerHeight;
     const fullHeight = document.documentElement.scrollHeight;
 
-    if (scrollTop + windowHeight >= fullHeight) {
+    if (scrollTop + windowHeight + 16 >= fullHeight) {
       setIsBottom(true);
       if (callback) callback();
     } else {

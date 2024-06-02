@@ -95,6 +95,7 @@ function RootStateProvider(props: PropTypes) {
     const currentYear = new Date().getFullYear();
     if (year === currentYear) return;
     if (!isBottom) return;
+    console.log("running bottom")
 
     setYear((prevState) => prevState + 1);
   }, [isBottom, year]);

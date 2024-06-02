@@ -69,6 +69,8 @@ function RootStateProvider(props: PropTypes) {
       } else {
         genereSelectHandler(id);
       }
+      setMovies([]);
+      setYear(2012);
     },
     [selectedGenre]
   );

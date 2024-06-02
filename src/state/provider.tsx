@@ -50,7 +50,7 @@ function RootStateProvider(props: PropTypes) {
     const response = (await data.json()) as MoviesResponseType;
     setMovies((prevState) => [
       ...prevState,
-      { year, movies: response.results! },
+      { year, movies: response.results!, id: crypto.randomUUID() },
     ]);
   }, [selectedGenre, year]);
 
@@ -75,6 +75,13 @@ function RootStateProvider(props: PropTypes) {
     [selectedGenre]
   );
 
+  const getGenereNameWithIds = useCallback(
+    (ids: number[]) => {
+      return ids.map((id) => genres.find((genre) => genre.id === id)?.name);
+    },
+    [genres]
+  );
+
   // Effects
   useEffect(() => {
     getGenres();
@@ -88,6 +95,7 @@ function RootStateProvider(props: PropTypes) {
     const currentYear = new Date().getFullYear();
     if (year === currentYear) return;
     if (!isBottom) return;
+
     setYear((prevState) => prevState + 1);
   }, [isBottom, year]);
 
@@ -97,8 +105,9 @@ function RootStateProvider(props: PropTypes) {
       movies,
       selectedGenre,
       onPillClickHandler,
+      getGenereNameWithIds,
     };
-  }, [genres, movies, onPillClickHandler, selectedGenre]);
+  }, [genres, getGenereNameWithIds, movies, onPillClickHandler, selectedGenre]);
 
   return (
     <RootStateContext.Provider value={value}>

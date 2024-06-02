@@ -1,8 +1,6 @@
 .movieCard {
   display: flex;
   flex-direction: row;
-  /* margin: 1rem; */
-  /* border: 1px solid #ddd; */
   border-radius: 5px;
   background-color: #fff;
   width: 100%;
@@ -43,4 +41,11 @@
 
 p span:first-of-type {
   font-weight: 600;
+}
+.chip {
+  border: 1px solid var(--primary-color);
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-size: 12px;
 }

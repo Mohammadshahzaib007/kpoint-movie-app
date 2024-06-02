@@ -21,6 +21,7 @@ export interface RootStateType {
   movies: YearWiseMoviesTypes[];
   selectedGenre: number[];
   onPillClickHandler: (id: number) => void;
+  getGenereNameWithIds: (ids: number[]) => void;
 }
 
 export interface MoviesResponseType {
@@ -49,4 +50,5 @@ export interface MovieType {
 export interface YearWiseMoviesTypes {
   year: number;
   movies: MovieType[];
+  id: string;
 }

@@ -4,6 +4,11 @@
   background-color: var(--secondary-color);
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+}
+
+.nav > div {
+  width: 80rem;
 }
 
 .nav img {

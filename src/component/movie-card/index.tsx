@@ -16,7 +16,12 @@ const MovieCard = (props: MovieCardPropTypes) => {
       <div className={styles.movieInfo}>
         <h3 className={styles.movieTitle}>{title}</h3>
         <p className={styles.movieGenre}>
-          <span>Genre:</span> {genre.join(", ")}
+          <span>Genre:</span>{" "}
+          {genre.map((g) => (
+            <span className={styles.chip} key={g}>
+              {g}
+            </span>
+          ))}
         </p>
         <p className={styles.movieCast}>
           <span>Cast:</span>{" "}

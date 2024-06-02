@@ -11,8 +11,8 @@ function HomePage() {
     <section className={styles.section}>
       <Container>
         <div className={styles.cardContainer}>
-          {movies?.map((data) => (
-            <React.Fragment key={data.year}>
+          {movies?.map((data, idx) => (
+            <React.Fragment key={data.year + "-" + idx}>
               <h1 className={styles.title}>{data.year} </h1>
               {data.movies?.map((movie) => (
                 <MovieCard

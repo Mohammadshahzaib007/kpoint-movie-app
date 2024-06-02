@@ -85,15 +85,9 @@ function RootStateProvider(props: PropTypes) {
   useEffect(() => {
     const currentYear = new Date().getFullYear();
     if (year === currentYear) return;
-    if (isBottom) {
-      setYear((prevState) => prevState + 1);
-    }
-    console.log({ isBottom });
+    if (!isBottom) return;
+    setYear((prevState) => prevState + 1);
   }, [isBottom, year]);
-
-  useEffect(() => {
-    console.log(year);
-  }, [year]);
 
   const value: RootStateType = useMemo(() => {
     return {

@@ -18,7 +18,7 @@ export interface MovieCardPropTypes {
 
 export interface RootStateType {
   genres: Genera[];
-  movies: MovieType[];
+  movies: YearWiseMoviesTypes[];
   selectedGenre: number[];
   onPillClickHandler: (id: number) => void;
 }
@@ -44,4 +44,9 @@ export interface MovieType {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface YearWiseMoviesTypes {
+  year: number;
+  movies: MovieType[];
 }

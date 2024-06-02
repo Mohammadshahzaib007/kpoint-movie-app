@@ -8,11 +8,12 @@ import {
 import {
   Genera,
   GeneraAPIResponseType,
-  MovieType,
   MoviesResponseType,
   RootStateType,
+  YearWiseMoviesTypes,
 } from "../types";
 import { BASE_URL } from "../contants";
+import useBottomScrollListener from "../hooks/use-bottom-scroll-listener";
 
 // needs to moved in .env file
 const API_KEY = "6515b23812ca7dab83ed7195e34625d1";
@@ -27,9 +28,12 @@ type PropTypes = {
 function RootStateProvider(props: PropTypes) {
   const { children } = props;
 
+  const isBottom = useBottomScrollListener();
+
   const [genres, setGenres] = useState<Genera[]>([]);
-  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [movies, setMovies] = useState<YearWiseMoviesTypes[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<number[]>([]);
+  const [year, setYear] = useState<number>(2012);
 
   const getGenres = async () => {
     const data = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
@@ -39,13 +43,16 @@ function RootStateProvider(props: PropTypes) {
 
   const getMovies = useCallback(async () => {
     const data = await fetch(
-      `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&primary_release_year=2012&page=1&vote_count.gte=100&with_genres=${selectedGenre.join(
+      `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&primary_release_year=${year}&page=1&vote_count.gte=100&with_genres=${selectedGenre.join(
         ","
       )}`
     );
     const response = (await data.json()) as MoviesResponseType;
-    setMovies(response.results!);
-  }, [selectedGenre]);
+    setMovies((prevState) => [
+      ...prevState,
+      { year, movies: response.results! },
+    ]);
+  }, [selectedGenre, year]);
 
   const genereSelectHandler = (id: number) => {
     setSelectedGenre((prevState) => [...prevState, id]);
@@ -66,6 +73,7 @@ function RootStateProvider(props: PropTypes) {
     [selectedGenre]
   );
 
+  // Effects
   useEffect(() => {
     getGenres();
   }, []);
@@ -73,6 +81,19 @@ function RootStateProvider(props: PropTypes) {
   useEffect(() => {
     getMovies();
   }, [getMovies]);
+
+  useEffect(() => {
+    const currentYear = new Date().getFullYear();
+    if (year === currentYear) return;
+    if (isBottom) {
+      setYear((prevState) => prevState + 1);
+    }
+    console.log({ isBottom });
+  }, [isBottom, year]);
+
+  useEffect(() => {
+    console.log(year);
+  }, [year]);
 
   const value: RootStateType = useMemo(() => {
     return {

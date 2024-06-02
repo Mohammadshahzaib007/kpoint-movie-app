@@ -19,6 +19,8 @@ export interface MovieCardPropTypes {
 export interface RootStateType {
   genres: Genera[];
   movies: MovieType[];
+  selectedGenre: number[];
+  onPillClickHandler: (id: number) => void;
 }
 
 export interface MoviesResponseType {

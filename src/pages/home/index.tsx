@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import Container from "../../component/container";
 import MovieCard from "../../component/movie-card";
 import styles from "./index.module.css";
-import { RootStateContext } from "../../state/provider";
+import useRootStateContext from "../../state/useRootStateContext";
 
 function HomePage() {
-  const { movies } = useContext(RootStateContext);
+  const { movies } = useRootStateContext();
 
   return (
     <section className={styles.section}>

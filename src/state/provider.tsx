@@ -1,4 +1,10 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   Genera,
   GeneraAPIResponseType,
@@ -23,6 +29,7 @@ function RootStateProvider(props: PropTypes) {
 
   const [genres, setGenres] = useState<Genera[]>([]);
   const [movies, setMovies] = useState<MovieType[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<number[]>([]);
 
   const getGenres = async () => {
     const data = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
@@ -30,25 +37,51 @@ function RootStateProvider(props: PropTypes) {
     setGenres(response.genres);
   };
 
-  const getMovies = async () => {
+  const getMovies = useCallback(async () => {
     const data = await fetch(
-      `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&primary_release_year=2012&page=1&vote_count.gte=100`
+      `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&primary_release_year=2012&page=1&vote_count.gte=100&with_genres=${selectedGenre.join(
+        ","
+      )}`
     );
     const response = (await data.json()) as MoviesResponseType;
     setMovies(response.results!);
+  }, [selectedGenre]);
+
+  const genereSelectHandler = (id: number) => {
+    setSelectedGenre((prevState) => [...prevState, id]);
   };
+
+  const genereUnselectHandler = (_id: number) => {
+    setSelectedGenre((prevState) => prevState.filter((id) => id !== _id));
+  };
+
+  const onPillClickHandler = useCallback(
+    (id: number) => {
+      if (selectedGenre.includes(id)) {
+        genereUnselectHandler(id);
+      } else {
+        genereSelectHandler(id);
+      }
+    },
+    [selectedGenre]
+  );
 
   useEffect(() => {
     getGenres();
-    getMovies();
   }, []);
+
+  useEffect(() => {
+    getMovies();
+  }, [getMovies]);
 
   const value: RootStateType = useMemo(() => {
     return {
       genres,
       movies,
+      selectedGenre,
+      onPillClickHandler,
     };
-  }, [genres, movies]);
+  }, [genres, movies, onPillClickHandler, selectedGenre]);
 
   return (
     <RootStateContext.Provider value={value}>
